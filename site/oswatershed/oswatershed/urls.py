@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls.defaults import patterns, url, include
+from django.conf.urls import patterns, url, include
 from oswatershed.views import PackageFeed
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 		(r'^pkg/(?P<pkg>[^/]+)/?$', 'oswatershed.views.pkg'),
 		(r'^pkg/(?P<pkg>[^/]+)/rss.xml$', PackageFeed()),
 		(r'^search2/(?P<search>[^/]+)/?$', 'oswatershed.views.search2'),
-		(r'^search/(?P<search>[^/]+)/?$', 'oswatershed.views.search'),
+		(r'^search(/(?P<search>[^/]*)/?)?$', 'oswatershed.views.search'),
 		(r'^group/(?P<group>[^/]+)/?$', 'oswatershed.views.pkg_set'),
 		(r'^sitemap_(?P<sm>[a-z0-9]*).xml$', 'oswatershed.views.sitemap'),
 		(r'^robots.txt$', 'oswatershed.views.robots'),

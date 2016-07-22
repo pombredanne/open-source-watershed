@@ -7,7 +7,7 @@ from utils import helper
 from utils.db import downstream
 from utils.types import Repo, DownstreamRelease
 
-MIRROR = "ftp.archlinux.org"
+MIRROR = "ftp.osuosl.org/pub/archlinux"
 HTTP_START_DIR = None
 FTP_START_DIR = None
 
@@ -29,7 +29,7 @@ def get_repos(test):
 			downstream.repo(repo, test)
 			downstream.add_branch(repo, "current", test)
 	
-	for comp in ["testing"]:
+	for comp in ["testing","community-testing"]:
 		for a in ARCHES:
 			repo = Repo()
 			repo.distro_id = distro_id
@@ -69,7 +69,7 @@ def crawl_repo(repo):
 			
 			if last:
 				last = last.st_mtime
-				last = datetime.datetime.fromtimestamp(last)
+				last = datetime.datetime.utcfromtimestamp(last)
 			
 			# ignore if its not new
 			if last and repo.last_crawl!=None and last<repo.last_crawl:
@@ -100,7 +100,7 @@ def crawl_repo(repo):
 					#print "ERROR: cannot parse",pkg["BUILDDATE"]
 					pass
 			else:
-				released = datetime.datetime.fromtimestamp(long(pkg["BUILDDATE"]))
+				released = datetime.datetime.utcfromtimestamp(long(pkg["BUILDDATE"]))
 			
 			rel = DownstreamRelease()
 			rel.repo_id = repo.id
