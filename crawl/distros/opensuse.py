@@ -9,8 +9,8 @@ MIRROR = "download.opensuse.org"
 HTTP_START_DIR = ""
 FTP_START_DIR = None
 COMPONENTS = ["non-oss","oss"]
-CURRENT = "13.1"
-FUTURE = "13.2"
+CURRENT = "openSUSE-current"
+FUTURE = "leap/42.2"
 
 def to_num(s):
 	if "-" in s:
